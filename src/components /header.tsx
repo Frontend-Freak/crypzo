@@ -1,0 +1,25 @@
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Link } from "react-router-dom";
+
+export default function Header() {
+	return (
+		<Box>
+			<AppBar>
+				<Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+					<Typography>CRYPZO</Typography>
+					<Box sx={{ display: "flex", gap: "20px", alignItems: "center", justifyContent: "center" }}>
+						<Link to={"/events"}>Мероприятия</Link>
+						<Link to={"/news"}>Новости</Link>
+						<Link to={"/favorites"}>Избранное</Link>
+						<Link to={"/profile"}>
+							<IconButton>
+								<AccountCircle />
+							</IconButton>
+						</Link>
+					</Box>
+				</Toolbar>
+			</AppBar>
+		</Box>
+	);
+}
