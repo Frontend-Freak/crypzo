@@ -1,18 +1,59 @@
+interface ImageData {
+	thumb: string;
+	small: string;
+	large: string;
+}
+
+interface Price {
+	usd: number;
+    rub: string
+}
+
+interface MarketData {
+	current_price: Price;
+	market_cap: Price;
+    market_cap_change_24h: number
+    total_supply: number
+    total_volume:Price
+    market_cap_rank: number
+    high_24h: Price,
+    low_24h: Price
+    ath: Price,
+    atl: Price,
+    ath_date: Price
+    atl_date: Price
+    ath_change_percentage: Price,
+    atl_change_percentage:Price
+}
+
+interface Links{
+    homepage: [0]
+}
+
 export interface CoinTypes {
 	id: string;
 	name: string;
-	image: string;
+	image: ImageData | string;
 	current_price: number;
 	market_cap: number;
 	total_volume: number;
 	total_supply: number;
 	symbol: string;
+	market_data: MarketData;
+    links: Links
 }
 
-export interface CryptoState{
-    list: CoinTypes[],
-    overview: CoinTypes | null;
-    totalPages: number
-    loading: boolean,
-    error: string | null
+export interface CryptoState {
+	list: CoinTypes[];
+	overview: CoinTypes | null;
+	totalPages: number;
+	loading: boolean;
+	error: string | null;
+}
+
+
+export interface AuthState {
+	user: unknown | null;
+	checkingAuth: boolean;
+	error: string | null;
 }

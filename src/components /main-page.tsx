@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { formatNumbers, addSpaces } from "../shared/utils";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../RTK/store";
-import {fetchCryptoList, fetchTotalCoins } from "../RTK/cryptoSlice";
+import { fetchCryptoList, fetchTotalCoins } from "../RTK/crypto-thunk";
 import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
@@ -73,7 +73,7 @@ export default function MainPage() {
 							<TableCell>{(page - 1) * 100 + index + 1}</TableCell>
 							<TableCell sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
 								<img
-									src={coin.image}
+									src={typeof coin.image === "string" ? coin.image : coin.image.large}
 									width={30}
 									height={30}
 									alt={coin.name}
@@ -83,8 +83,8 @@ export default function MainPage() {
 							<TableCell>${addSpaces(coin.current_price)}</TableCell>
 							<TableCell>${addSpaces(coin.market_cap)}</TableCell>
 							<TableCell>${addSpaces(coin.total_volume)}</TableCell>
-							<TableCell sx={{ textTransform: "uppercase" }}>
-								{formatNumbers(coin.total_supply)} {coin.symbol}
+							<TableCell>
+								{formatNumbers(coin.total_supply)} {coin.symbol.toUpperCase()}
 							</TableCell>
 						</TableRow>
 					))}
