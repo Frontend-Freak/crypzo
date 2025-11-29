@@ -7,10 +7,10 @@ export default function Header() {
 		<Box>
 			<AppBar>
 				<Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-					<Link to={"/"}><Typography>CRYPZO</Typography></Link>
+					<Link to={"/"}>
+						<Typography>CRYPZO</Typography>
+					</Link>
 					<Box sx={{ display: "flex", gap: "20px", alignItems: "center", justifyContent: "center" }}>
-						<Link to={"/events"}>Мероприятия</Link>
-						<Link to={"/news"}>Новости</Link>
 						<Link to={"/favorites"}>Избранное</Link>
 						<Link to={"/profile"}>
 							<IconButton>

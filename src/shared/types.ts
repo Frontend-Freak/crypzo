@@ -6,28 +6,28 @@ interface ImageData {
 
 interface Price {
 	usd: number;
-    rub: string
+	rub: string;
 }
 
 interface MarketData {
 	current_price: Price;
 	market_cap: Price;
-    market_cap_change_24h: number
-    total_supply: number
-    total_volume:Price
-    market_cap_rank: number
-    high_24h: Price,
-    low_24h: Price
-    ath: Price,
-    atl: Price,
-    ath_date: Price
-    atl_date: Price
-    ath_change_percentage: Price,
-    atl_change_percentage:Price
+	market_cap_change_24h: number;
+	total_supply: number;
+	total_volume: Price;
+	market_cap_rank: number;
+	high_24h: Price;
+	low_24h: Price;
+	ath: Price;
+	atl: Price;
+	ath_date: Price;
+	atl_date: Price;
+	ath_change_percentage: Price;
+	atl_change_percentage: Price;
 }
 
-interface Links{
-    homepage: [0]
+interface Links {
+	homepage: [0];
 }
 
 export interface CoinTypes {
@@ -40,7 +40,7 @@ export interface CoinTypes {
 	total_supply: number;
 	symbol: string;
 	market_data: MarketData;
-    links: Links
+	links: Links;
 }
 
 export interface CryptoState {
@@ -51,9 +51,22 @@ export interface CryptoState {
 	error: string | null;
 }
 
-
 export interface AuthState {
 	user: unknown | null;
 	checkingAuth: boolean;
 	error: string | null;
+}
+
+export interface AuthFormState {
+	email: string;
+	password: string;
+	confirmPassword: string;
+	showPassword: boolean;
+}
+
+export interface SearchCoin {
+	id: string;
+	name: string;
+	symbol: string;
+	large: string;
 }

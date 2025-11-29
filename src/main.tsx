@@ -35,14 +35,14 @@ const router = createBrowserRouter([
 				path: "/coin/:id",
 				element: <Overview />,
 			},
-      {
-        path: "/login",
-        element: <LoginPage/>
-      },
-      {
-        path:"/register",
-        element: <RegisterPage/>
-      }
+			{
+				path: "/login",
+				element: <LoginPage />,
+			},
+			{
+				path: "/register",
+				element: <RegisterPage />,
+			},
 		],
 	},
 ]);

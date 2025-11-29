@@ -1,19 +1,17 @@
 import { Box, Button, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../RTK/store";
-import { useState } from "react";
 import { signInThunk } from "../RTK/auth-thunk";
 import { Link, useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { setEmail, setPassword, toggleShowPassword} from "../RTK/login-slice";
 
 export default function LoginPage() {
 	const dispatch = useDispatch<AppDispatch>();
 	const { error } = useSelector((state: RootState) => state.auth);
+	const {email, password, showPassword} = useSelector((state:RootState) => state.authForm)
 	const navigate = useNavigate();
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [showPassword, setShowPassword] = useState(false);
 
 	async function handleSignInClick() {
 		const result = await dispatch(signInThunk({ email, password }));
@@ -23,13 +21,16 @@ export default function LoginPage() {
 	}
 
 	function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setEmail(e.target.value);
+		dispatch(setEmail(e.target.value));
 	}
 
 	function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setPassword(e.target.value);
+		dispatch(setPassword(e.target.value));
 	}
 
+	function handleShowPassword(){
+		dispatch(toggleShowPassword())
+	}
 	function handleExitClick() {
 		navigate("/");
 	}
@@ -69,7 +70,9 @@ export default function LoginPage() {
 					InputProps={{
 						endAdornment: (
 							<InputAdornment position="end">
-								<IconButton onClick={() => setShowPassword(!showPassword)}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
+								<IconButton onClick={handleShowPassword}>
+									{showPassword ? <VisibilityOff /> : <Visibility />}
+								</IconButton>
 							</InputAdornment>
 						),
 					}}

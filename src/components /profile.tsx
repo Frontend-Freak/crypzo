@@ -19,7 +19,7 @@ export default function Profile() {
 	return (
 		<PrivateRoute>
 			<Box sx={{ px: 3, py: 2, height: "100vh", boxSizing: "border-box" }}>
-				<Box sx={{ display: "flex", justifyContent: "flex-end", marginTop:"70px" }}>
+				<Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: "70px" }}>
 					<Button onClick={handleExitClick}>Назад</Button>
 				</Box>
 				<Box

@@ -1,10 +1,8 @@
-import type {PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import type { CryptoState, CoinTypes } from "../shared/types";
 import { COINS_PER_PAGE } from "../shared/constants";
 import { fetchCoinOverview, fetchCryptoList, fetchTotalCoins } from "./crypto-thunk";
-
-
 
 const initialState: CryptoState = {
 	list: [],

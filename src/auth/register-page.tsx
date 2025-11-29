@@ -2,31 +2,33 @@ import { Box, Button, IconButton, InputAdornment, TextField, Typography, Snackba
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpThunk } from "../RTK/auth-thunk";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../RTK/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../RTK/store";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { setConfirmPassword, setEmail, setPassword, toggleShowPassword } from "../RTK/login-slice";
 
 export default function RegisterPage() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [showPassword, setShowPassword] = useState(false);
+	const {email, password, confirmPassword, showPassword} = useSelector((state:RootState) => state.authForm)
 
 	const [openSnackbar, setOpenSnackbar] = useState(false);
 	const [snackbarMessage, setSnackbarMessage] = useState("");
 	const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
 
 	function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setEmail(e.target.value);
+		dispatch(setEmail(e.target.value));
 	}
 
 	function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setPassword(e.target.value);
+		dispatch(setPassword(e.target.value));
 	}
 	function handleConfirmPasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setConfirmPassword(e.target.value);
+		dispatch(setConfirmPassword(e.target.value));
+	}
+
+	function handleShowPassword(){
+		dispatch(toggleShowPassword())
 	}
 
 	function handleExitClick() {
@@ -89,7 +91,7 @@ export default function RegisterPage() {
 					InputProps={{
 						endAdornment: (
 							<InputAdornment position="end">
-								<IconButton onClick={() => setShowPassword(!showPassword)}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
+								<IconButton onClick={handleShowPassword}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
 							</InputAdornment>
 						),
 					}}
@@ -104,7 +106,7 @@ export default function RegisterPage() {
 					InputProps={{
 						endAdornment: (
 							<InputAdornment position="end">
-								<IconButton onClick={() => setShowPassword(!showPassword)}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
+								<IconButton onClick={handleShowPassword}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
 							</InputAdornment>
 						),
 					}}
