@@ -3,15 +3,15 @@ import { createRoot } from "react-dom/client";
 import "./css/reset.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
-import ErrorPage from "./components /error-page.tsx";
-import Favorites from "./components /favorites.tsx";
-import Profile from "./components /profile.tsx";
+import ErrorPage from "./pages/error-page.tsx";
+import { FavoritesWrapper } from "./pages/favorites.tsx";
 import { Provider } from "react-redux";
 import { store } from "./RTK/store.ts";
 import Layout from "./layout.tsx";
-import Overview from "./components /overview-page/overview-page.tsx";
-import LoginPage from "./auth/login-page.tsx";
-import RegisterPage from "./auth/register-page.tsx";
+import Overview from "./pages/overview-page.tsx";
+import LoginPage from "./pages/login-page.tsx";
+import RegisterPage from "./pages/register-page.tsx";
+import Profile from "./pages/profile.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/favorites",
-				element: <Favorites />,
+				element: <FavoritesWrapper />,
 			},
 			{
 				path: "/coin/:id",

@@ -10,7 +10,7 @@ import { setConfirmPassword, setEmail, setPassword, toggleShowPassword } from ".
 export default function RegisterPage() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>();
-	const {email, password, confirmPassword, showPassword} = useSelector((state:RootState) => state.authForm)
+	const { email, password, confirmPassword, showPassword } = useSelector((state: RootState) => state.authForm);
 
 	const [openSnackbar, setOpenSnackbar] = useState(false);
 	const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -27,8 +27,8 @@ export default function RegisterPage() {
 		dispatch(setConfirmPassword(e.target.value));
 	}
 
-	function handleShowPassword(){
-		dispatch(toggleShowPassword())
+	function handleShowPassword() {
+		dispatch(toggleShowPassword());
 	}
 
 	function handleExitClick() {

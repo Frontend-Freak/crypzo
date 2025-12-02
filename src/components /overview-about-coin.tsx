@@ -1,7 +1,8 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../RTK/store";
-import { addSpaces, formatNumbers } from "../../shared/utils";
+import type { RootState } from "../RTK/store";
+import { addSpaces, formatNumbers } from "../shared/utils";
+import ToggleFavoriteButton from "./favorites-button";
 
 export default function AboutCoin() {
 	const { overview } = useSelector((state: RootState) => state.crypto);
@@ -16,6 +17,7 @@ export default function AboutCoin() {
 					alt={overview.name}
 				/>
 				<Typography>{`${overview.name} (${overview.symbol.toUpperCase()})  #${overview.market_data.market_cap_rank}`}</Typography>
+				<ToggleFavoriteButton coinId={overview.id} />
 			</Box>
 			<Typography sx={{ fontSize: "30px" }}>{addSpaces(overview.market_data.current_price.usd)} $</Typography>
 			<Paper sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -47,18 +49,21 @@ export default function AboutCoin() {
 					<Typography>Минимум</Typography>
 					<Typography>$ {addSpaces(overview.market_data.high_24h.usd)}</Typography>
 				</Box>
+
 				<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 					<Typography>Максимум</Typography>
 					<Typography>$ {addSpaces(overview.market_data.low_24h.usd)}</Typography>
 				</Box>
 			</Box>
-			<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%"}}>
+
+			<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
 				<Typography sx={{ fontSize: "12px" }}>Исторический максимум {overview.market_data.ath_date.rub.slice(0, 10)}</Typography>
 				<Typography sx={{ textAlign: "right" }}>
 					$ {overview.market_data.ath.usd} {overview.market_data.ath_change_percentage.usd.toFixed(2)} %
 				</Typography>
 			</Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%"}}>
+
+			<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
 				<Typography sx={{ fontSize: "12px" }}>Исторический минимум {overview.market_data.atl_date.rub.slice(0, 10)}</Typography>
 				<Typography sx={{ textAlign: "right" }}>
 					$ {overview.market_data.atl.usd} +{overview.market_data.atl_change_percentage.usd.toFixed(2)} %

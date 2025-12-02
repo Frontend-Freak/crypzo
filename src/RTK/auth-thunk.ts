@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { supabase } from "../supabase";
+import { supabase } from "../shared/supabase";
 
 export const signInThunk = createAsyncThunk("auth/signIn", async ({ email, password }: { email: string; password: string }, thunkAPI) => {
 	const { data, error } = await supabase.auth.signInWithPassword({

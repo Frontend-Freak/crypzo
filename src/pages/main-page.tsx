@@ -1,10 +1,14 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Box, CircularProgress, Pagination, TextField } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Box, Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { formatNumbers, addSpaces } from "../shared/utils";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../RTK/store";
-import { fetchCryptoList, fetchTotalCoins, searchCoins } from "../RTK/crypto-thunk";
+import { fetchCryptoList, fetchTotalCoins } from "../RTK/crypto-thunk";
 import { useNavigate } from "react-router-dom";
+import ToggleFavoriteButton from "../components /favorites-button";
+import { fetchFavorites } from "../RTK/add-favorites-thunk";
+import Loading from "../components /loading";
+import Error from "../components /error";
 
 export default function MainPage() {
 	const dispatch = useDispatch<AppDispatch>();
@@ -12,9 +16,16 @@ export default function MainPage() {
 	const { list: searchResult, loading: searchLoading } = useSelector((state: RootState) => state.search);
 	const [page, setPage] = useState(1);
 	const navigate = useNavigate();
-	const [search, setSearch] = useState("");
 
-	const showList = search.trim() ? searchResult : list;
+	const userId = useSelector((state: RootState) => state.auth.user?.id);
+
+	useEffect(() => {
+		if (userId) {
+			dispatch(fetchFavorites(userId));
+		}
+	}, [dispatch, userId]);
+
+	const showList = searchResult.length ? searchResult : list;
 
 	useEffect(() => {
 		dispatch(fetchTotalCoins());
@@ -25,60 +36,18 @@ export default function MainPage() {
 		setPage(value);
 	}
 
-	function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setSearch(e.target.value);
-	}
-
-	function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-		if (e.key === "Enter") {
-			dispatch(searchCoins(search));
-		}
-	}
-
-	if (loading || searchLoading) {
-		return (
-			<Box
-				sx={{
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					height: "70vh",
-				}}
-			>
-				<CircularProgress />
-			</Box>
-		);
-	}
-	if (error) {
-		return (
-			<Box
-				sx={{
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					height: "70vh",
-				}}
-			>
-				<Typography color="error">{error} :(</Typography>;
-			</Box>
-		);
-	}
+	if (loading || searchLoading) return <Loading />;
+	if (error) return <Error error={error} />;
 	return (
 		<Box sx={{ marginTop: "70px", padding: "0 24px" }}>
-			<TextField
-				sx={{ width: "20vw", "& .MuiOutlinedInput-root": { height: 40 } }}
-				placeholder="Поиск"
-				value={search}
-				onChange={handleSearchChange}
-				onKeyDown={handleKeyDown}
-			/>
-			{search.trim() && showList.length === 0 ? (
+			{showList.length === 0 ? (
 				<Typography>Монета не найдена</Typography>
 			) : (
 				<TableContainer>
 					<Table>
 						<TableHead>
 							<TableRow>
+								<TableCell></TableCell>
 								<TableCell>#</TableCell>
 								<TableCell>Монета</TableCell>
 								<TableCell>Цена</TableCell>
@@ -92,18 +61,21 @@ export default function MainPage() {
 								<TableRow
 									key={coin.id}
 									hover
-									sx={{ cursor: "pointer" }}
+									sx={{ cursor: "pointer", maxHeight: "32px", height: "100%" }}
 									onClick={() => navigate(`/coin/${coin.id}`)}
 								>
+									<TableCell>
+										<ToggleFavoriteButton coinId={coin.id} />
+									</TableCell>
 									<TableCell>{(page - 1) * 100 + index + 1}</TableCell>
 									<TableCell sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
 										<img
 											src={typeof coin.image === "string" ? coin.image : coin.image.large}
-											width={30}
-											height={30}
+											width={32}
+											height={32}
 											alt={coin.name}
 										/>
-										<Typography>{coin.name}</Typography>
+										<Typography noWrap>{coin.name}</Typography>
 									</TableCell>
 									<TableCell>${addSpaces(coin.current_price)}</TableCell>
 									<TableCell>${addSpaces(coin.market_cap)}</TableCell>

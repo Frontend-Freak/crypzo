@@ -4,14 +4,13 @@ import type { AppDispatch, RootState } from "../RTK/store";
 import { signInThunk } from "../RTK/auth-thunk";
 import { Link, useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { setEmail, setPassword, toggleShowPassword} from "../RTK/login-slice";
+import { setEmail, setPassword, toggleShowPassword } from "../RTK/login-slice";
 
 export default function LoginPage() {
 	const dispatch = useDispatch<AppDispatch>();
 	const { error } = useSelector((state: RootState) => state.auth);
-	const {email, password, showPassword} = useSelector((state:RootState) => state.authForm)
+	const { email, password, showPassword } = useSelector((state: RootState) => state.authForm);
 	const navigate = useNavigate();
-
 
 	async function handleSignInClick() {
 		const result = await dispatch(signInThunk({ email, password }));
@@ -28,8 +27,8 @@ export default function LoginPage() {
 		dispatch(setPassword(e.target.value));
 	}
 
-	function handleShowPassword(){
-		dispatch(toggleShowPassword())
+	function handleShowPassword() {
+		dispatch(toggleShowPassword());
 	}
 	function handleExitClick() {
 		navigate("/");
@@ -70,9 +69,7 @@ export default function LoginPage() {
 					InputProps={{
 						endAdornment: (
 							<InputAdornment position="end">
-								<IconButton onClick={handleShowPassword}>
-									{showPassword ? <VisibilityOff /> : <Visibility />}
-								</IconButton>
+								<IconButton onClick={handleShowPassword}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
 							</InputAdornment>
 						),
 					}}

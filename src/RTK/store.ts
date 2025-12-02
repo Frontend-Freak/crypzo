@@ -3,6 +3,7 @@ import cryptoReducer from "./crypto-slice";
 import authReducer from "./auth-slice";
 import authFormReducer from "./login-slice";
 import searchReducer from "./search-slice";
+import favoriteReducer from "./add-favorites-slice";
 
 export const store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
 		search: searchReducer,
 		auth: authReducer,
 		authForm: authFormReducer,
+		favorites: favoriteReducer,
 	},
 });
 

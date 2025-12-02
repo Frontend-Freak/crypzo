@@ -51,8 +51,13 @@ export interface CryptoState {
 	error: string | null;
 }
 
+interface User {
+	email?: string;
+	id?: string;
+}
+
 export interface AuthState {
-	user: unknown | null;
+	user: User | null;
 	checkingAuth: boolean;
 	error: string | null;
 }

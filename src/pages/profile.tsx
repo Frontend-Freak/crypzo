@@ -1,13 +1,16 @@
 import { Box, Button, Typography } from "@mui/material";
-import PrivateRoute from "./private-route";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../RTK/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../RTK/store";
 import { signOutThunk } from "../RTK/auth-thunk";
 import { useNavigate } from "react-router-dom";
+import PrivateRoute from "../components /private-route";
 
 export default function Profile() {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
+	const user = useSelector((state: RootState) => state.auth.user);
+
+	console.log(user);
 
 	function handleExitAccountClick() {
 		dispatch(signOutThunk());
@@ -34,6 +37,8 @@ export default function Profile() {
 					}}
 				>
 					<Typography sx={{ fontSize: "25px" }}>Профиль</Typography>
+
+					<Typography>{`Email: ${user?.email}`}</Typography>
 					<Button
 						color="error"
 						onClick={handleExitAccountClick}

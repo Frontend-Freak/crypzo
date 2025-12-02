@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "./RTK/store";
 import { checkAuthThunk } from "./RTK/auth-thunk";
-import MainPage from "./components /main-page";
+import MainPage from "./pages/main-page";
 
 export default function App() {
 	const dispatch = useDispatch<AppDispatch>();
