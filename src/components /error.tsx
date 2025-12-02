@@ -10,7 +10,7 @@ export default function Error({ error }: { error: string }) {
 				height: "70vh",
 			}}
 		>
-			<Typography color="error">{error} :(</Typography>;
+			<Typography color="error">{error} :(</Typography>
 		</Box>
 	);
 }
