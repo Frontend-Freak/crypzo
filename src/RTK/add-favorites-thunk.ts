@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 import { getFavorites, addFavorite, removeFavorite, type FavoriteItem } from "../shared/add-favorite";
+const apiKey = "CG-by3eATfETrP41v21nPAumTuG";
 
 export const fetchFavorites = createAsyncThunk<string[], string>("favorites/fetch", async (userId: string) => {
 	const response: FavoriteItem[] = await getFavorites(userId);
@@ -20,7 +21,9 @@ export const removeFavorites = createAsyncThunk<string, { userId: string; coinId
 export const fetchFavoriteCoins = createAsyncThunk("favorites/fetchFavoriteCoins", async (ids: string[], thunkAPI) => {
 	try {
 		const query = ids.join(",");
-		const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${query}`);
+		const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${query}`, {
+			headers: { "x-cg-demo-api-key": apiKey },
+		});
 		const data = await response.json();
 		return data;
 	} catch (error: unknown) {
