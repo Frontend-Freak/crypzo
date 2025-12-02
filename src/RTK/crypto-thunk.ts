@@ -16,9 +16,7 @@ export const fetchTotalCoins = createAsyncThunk<number>("crypto/fetchTotalCoins"
 		const data = await response.json();
 		return data.length;
 	} catch (error: unknown) {
-		let message = "Unknown error";
-		if (error instanceof Error) message = error.message;
-		return thunkAPI.rejectWithValue(message);
+		return thunkAPI.rejectWithValue(error);
 	}
 });
 
@@ -29,9 +27,7 @@ export const fetchCryptoList = createAsyncThunk<CoinTypes[], number>("crypto/fet
 		const data: CoinTypes[] = await response.json();
 		return data;
 	} catch (error: unknown) {
-		let message = "Unknown error";
-		if (error instanceof Error) message = error.message;
-		return thunkAPI.rejectWithValue(message);
+		return thunkAPI.rejectWithValue(error);
 	}
 });
 
@@ -44,9 +40,7 @@ export const fetchCoinOverview = createAsyncThunk<CoinTypes, string>("crypto/fet
 		const data: CoinTypes = await response.json();
 		return data;
 	} catch (error: unknown) {
-		let message = "Unknown error";
-		if (error instanceof Error) message = error.message;
-		return thunkAPI.rejectWithValue(message);
+		return thunkAPI.rejectWithValue(error);
 	}
 });
 
@@ -69,8 +63,6 @@ export const searchCoins = createAsyncThunk<CoinTypes[], string>("crypto/search"
 
 		return coins;
 	} catch (error: unknown) {
-		let message = "Unknown error";
-		if (error instanceof Error) message = error.message;
-		return thunkAPI.rejectWithValue(message);
+		return thunkAPI.rejectWithValue(error);
 	}
 });
