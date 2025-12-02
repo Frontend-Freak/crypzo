@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 import { getFavorites, addFavorite, removeFavorite, type FavoriteItem } from "../shared/add-favorite";
-const apiKey = "CG-by3eATfETrP41v21nPAumTuG";
+import { apiKey } from "../shared/constants";
+
 
 export const fetchFavorites = createAsyncThunk<string[], string>("favorites/fetch", async (userId: string) => {
 	const response: FavoriteItem[] = await getFavorites(userId);

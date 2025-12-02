@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { CoinTypes, SearchCoin } from "../shared/types";
+import { apiKey } from "../shared/constants";
 
 function sleep(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const apiKey = "CG-by3eATfETrP41v21nPAumTuG";
 
 export const fetchTotalCoins = createAsyncThunk<number>("crypto/fetchTotalCoins", async (_, thunkAPI) => {
 	try {
