@@ -53,6 +53,12 @@ export const searchCoins = createAsyncThunk<CoinTypes[], string>("crypto/search"
 		});
 		const data: { coins: SearchCoin[] } = await response.json();
 
+		function sleep(ms: number) {
+			return new Promise((resolve) => setTimeout(resolve, ms));
+		}
+
+		await sleep(1000);
+
 		const ids = data.coins.map((coin) => coin.id).join(",");
 
 		const marketResponse = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&per_page=100&page=1&sparkline=false`, {
