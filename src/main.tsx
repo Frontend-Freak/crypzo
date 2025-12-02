@@ -2,16 +2,16 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./css/reset.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App.tsx";
-import ErrorPage from "./pages/error-page.tsx";
-import { FavoritesWrapper } from "./pages/favorites.tsx";
+import App from "./App";
+import ErrorPage from "./pages/error-page";
+import { FavoritesWrapper } from "./pages/favorites";
 import { Provider } from "react-redux";
-import { store } from "./RTK/store.ts";
-import Layout from "./layout.tsx";
-import Overview from "./pages/overview-page.tsx";
-import LoginPage from "./pages/login-page.tsx";
-import RegisterPage from "./pages/register-page.tsx";
-import Profile from "./pages/profile.tsx";
+import { store } from "./RTK/store";
+import Layout from "./layout";
+import Overview from "./pages/overview-page";
+import LoginPage from "./pages/login-page";
+import RegisterPage from "./pages/register-page";
+import Profile from "./pages/profile";
 
 const router = createBrowserRouter([
 	{
