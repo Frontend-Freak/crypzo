@@ -3,7 +3,6 @@ import type { RootState } from "./store";
 import { getFavorites, addFavorite, removeFavorite, type FavoriteItem } from "../shared/add-favorite";
 import { apiKey } from "../shared/constants";
 
-
 export const fetchFavorites = createAsyncThunk<string[], string>("favorites/fetch", async (userId: string) => {
 	const response: FavoriteItem[] = await getFavorites(userId);
 	return response.map((item) => item.coin_id);

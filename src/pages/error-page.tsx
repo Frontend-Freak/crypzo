@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
 export default function ErrorPage() {
@@ -5,13 +6,11 @@ export default function ErrorPage() {
 	console.error(error);
 	if (isRouteErrorResponse(error)) {
 		return (
-			<>
-				<h1>Oops!</h1>
-				<p>Sorry, an unexpected error has occurred.</p>
-				<p>
-					<i>{error.statusText}</i>
-				</p>
-			</>
+			<Box>
+				<Typography>Oops!</Typography>
+				<Typography>Sorry, an unexpected error has occurred.</Typography>
+				<Typography>{error.statusText}</Typography>
+			</Box>
 		);
 	}
 }

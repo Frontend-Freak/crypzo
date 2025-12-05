@@ -16,7 +16,7 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"types": ["vite/client", "jest"]
+		"types": ["node","vite/client", "jest"]
 	},
 	"include": ["src", "src/setupTests.ts"]
 }

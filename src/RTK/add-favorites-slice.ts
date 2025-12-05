@@ -1,13 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { addFavorites, fetchFavorites, removeFavorites, fetchFavoriteCoins } from "./add-favorites-thunk";
-import type { CoinTypes } from "../shared/types";
-
-interface FavoritesState {
-	coins: string[];
-	loading: boolean;
-	favoriteCoinsData: CoinTypes[];
-	error: string | null;
-}
+import type { FavoritesState } from "../shared/types";
 
 const initialState: FavoritesState = {
 	coins: [],

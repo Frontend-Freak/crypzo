@@ -1,4 +1,6 @@
+import { TextEncoder, TextDecoder } from "util";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-(globalThis as any).TextEncoder = globalThis.TextEncoder;
+(globalThis as any).TextEncoder = TextEncoder;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-(globalThis as any).TextDecoder = globalThis.TextDecoder;
+(globalThis as any).TextDecoder = TextDecoder;

@@ -8,6 +8,8 @@ export default function SearchInput() {
 	const dispatch = useDispatch<AppDispatch>();
 	const [value, setValue] = useState("");
 
+	console.log(value);
+
 	function handleChangeValue(e: React.ChangeEvent<HTMLInputElement>) {
 		setValue(e.target.value);
 		dispatch(searchCoins(e.target.value));

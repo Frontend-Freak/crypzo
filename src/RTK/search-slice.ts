@@ -31,7 +31,7 @@ const searchSlice = createSlice({
 			})
 			.addCase(searchCoins.rejected, (state, action) => {
 				state.loading = false;
-				state.error = (action.payload as string) || action.error.message || "error";
+				state.error = action.payload as string;
 				state.list = [];
 			});
 	},

@@ -2,11 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { CoinTypes, SearchCoin } from "../shared/types";
 import { apiKey } from "../shared/constants";
 
-function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-
 export const fetchTotalCoins = createAsyncThunk<number>("crypto/fetchTotalCoins", async (_, thunkAPI) => {
 	try {
 		const response = await fetch("https://api.coingecko.com/api/v3/coins/list", {
@@ -36,7 +31,6 @@ export const fetchCoinOverview = createAsyncThunk<CoinTypes, string>("crypto/fet
 		const response = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`, {
 			headers: { "x-cg-demo-api-key": apiKey },
 		});
-		if (!response.ok) throw new Error(`Status: ${response.status}`);
 		const data: CoinTypes = await response.json();
 		return data;
 	} catch (error: unknown) {
@@ -49,20 +43,16 @@ export const searchCoins = createAsyncThunk<CoinTypes[], string>("crypto/search"
 		const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`, {
 			headers: { "x-cg-demo-api-key": apiKey },
 		});
-		if (!response.ok) throw new Error(`Status: ${response.status}`);
 		const data: { coins: SearchCoin[] } = await response.json();
 
-		await sleep(1000);
-
-		const ids = data.coins.map((c) => c.id).join(",");
+		const ids = data.coins.map((coin) => coin.id).join(",");
 		if (!ids) return [];
 
 		const marketResponse = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&per_page=100&page=1&sparkline=false`, { headers: { "x-cg-demo-api-key": apiKey } });
-		if (!marketResponse.ok) throw new Error(`Status: ${marketResponse.status}`);
 		const coins: CoinTypes[] = await marketResponse.json();
 
 		return coins;
 	} catch (error: unknown) {
-		return thunkAPI.rejectWithValue(error);
+		return thunkAPI.rejectWithValue(error instanceof Error ? error.message : "Error");
 	}
 });

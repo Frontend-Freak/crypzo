@@ -1,7 +1,6 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { AuthState } from "../shared/types";
 import { checkAuthThunk, signInThunk, signUpThunk, signOutThunk } from "./auth-thunk";
-
 
 const initialState: AuthState = {
 	user: null,

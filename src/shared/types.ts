@@ -75,3 +75,10 @@ export interface SearchCoin {
 	symbol: string;
 	large: string;
 }
+
+export interface FavoritesState {
+	coins: string[];
+	loading: boolean;
+	favoriteCoinsData: CoinTypes[];
+	error: string | null;
+}
