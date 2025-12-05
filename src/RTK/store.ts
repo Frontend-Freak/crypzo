@@ -4,6 +4,7 @@ import authReducer from "./auth-slice";
 import authFormReducer from "./login-slice";
 import searchReducer from "./search-slice";
 import favoriteReducer from "./add-favorites-slice";
+import themeReducer from "./theme-slice"
 
 export const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
 		auth: authReducer,
 		authForm: authFormReducer,
 		favorites: favoriteReducer,
+		theme: themeReducer
 	},
 });
 

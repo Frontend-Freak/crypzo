@@ -39,7 +39,7 @@ export default function MainPage() {
 	if (loading || searchLoading) return <Loading />;
 	if (error) return <Error error={error} />;
 	return (
-		<Box sx={{ marginTop: "70px", padding: "0 24px" }}>
+		<Box sx={{ marginTop: "60px", padding: "0 24px" }}>
 			{showList.length === 0 ? (
 				<Typography>Монета не найдена</Typography>
 			) : (

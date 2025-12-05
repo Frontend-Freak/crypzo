@@ -31,7 +31,7 @@ export default function Favorites({ userId }: { userId: string }) {
 	if (error) return <Error error={error} />;
 
 	return (
-		<Box sx={{ marginTop: "70px", padding: "0 24px" }}>
+		<Box sx={{ marginTop: "60px", padding: "0 24px" }}>
 			<Box sx={{ display: "flex", justifyContent: "flex-end" }}>
 				<Button onClick={handleExitClick}>Назад</Button>
 			</Box>
